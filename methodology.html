@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Methodology – Scot Vote Manifesto Matcher</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav class="site-nav">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-brand">
+        <img src="logo-icon.png" alt="Scot Vote Manifesto Matcher logo" style="height:42px;width:auto;display:block">
+        <div>
+          <span class="nav-brand-text">Scot Vote</span>
+          <span class="nav-brand-sub">Manifesto Matcher</span>
+        </div>
+      </a>
+      <div class="nav-actions">
+        <ul id="nav-links" class="nav-links"></ul>
+        <a href="match.html" class="btn btn-primary btn-sm">Find My Match →</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="section">
+    <div class="container">
+      <header class="page-intro">
+        <h1 class="page-title">How We Calculate</h1>
+        <p class="page-sub">The matcher uses a transparent scoring model based on your chosen topics, your preferred direction on each issue, and how strongly you care about it.</p>
+      </header>
+
+      <section class="meth-card">
+        <h3>1. Topic selection and position setting</h3>
+        <p>You select up to 10 topics, then set both direction and strength on each one. Direction becomes a sign value, and strength becomes a user weighting score.</p>
+        <div class="formula">USS = user strength score (1 to 5)
+UserSign = support → +1
+UserSign = neutral → 0
+UserSign = oppose  → -1</div>
+      </section>
+
+      <section class="meth-card">
+        <h3>2. Party scoring scale</h3>
+        <p>Each party gets a topic score from 1 to 5. These scores represent how strongly the party supports or opposes a policy area, based on manifesto data where published, or website and campaign material where not.</p>
+        <div class="formula">5 = strongly champions
+4 = supportive
+3 = neutral / no clear position
+2 = mild opposition
+1 = strongly opposed</div>
+      </section>
+
+      <section class="meth-card">
+        <h3>3. Match contribution formula</h3>
+        <p>For each selected topic, the model calculates a match contribution using the party score, your chosen direction, and your strength. Positive values increase a party's total, and negative values decrease it.</p>
+        <div class="formula">MC = USS × (PS - 3) × UserSign
+
+Worked example:
+USS = 5
+PS = 5
+UserSign = +1
+MC = 5 × (5 - 3) × 1 = 10</div>
+      </section>
+
+      <section class="meth-card">
+        <h3>4. Normalisation to 0–100</h3>
+        <p>Each party's total PMS is then normalised using min-max scaling so the highest-scoring party appears at 100 and the lowest at 0. If all scores are equal, every party is shown as 50.</p>
+        <div class="formula">PMS[P] += MC
+mx    = Math.max(...PMS values)
+mn    = Math.min(...PMS values)
+range = mx - mn
+
+if range &lt;= 0:
+  norm[P] = 50
+else:
+  norm[P] = Math.round((PMS[P] - mn) / range × 100)</div>
+      </section>
+
+      <section class="meth-card">
+        <h3>5. Limitations and transparency</h3>
+        <p>The site is non-partisan and shows its scoring method publicly. Scores are only as current as the underlying manifesto data and published sources. Where a party has not published a manifesto, its score is labelled as estimated and derived from public website and campaign material.</p>
+        <p>When a published manifesto differs meaningfully from website messaging on a topic you selected, the results page flags that discrepancy separately so the scoring source remains visible.</p>
+      </section>
+    </div>
+  </main>
+
+  <footer id="site-footer"></footer>
+
+  <script src="main.js"></script>
+  <script>
+    initNav("methodology");
+    initFooter();
+  </script>
+</body>
+</html>

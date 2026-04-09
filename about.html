@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About – Scot Vote Manifesto Matcher</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav class="site-nav">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-brand">
+        <img src="logo-icon.png" alt="Scot Vote Manifesto Matcher logo" style="height:42px;width:auto;display:block">
+        <div>
+          <span class="nav-brand-text">Scot Vote</span>
+          <span class="nav-brand-sub">Manifesto Matcher</span>
+        </div>
+      </a>
+      <div class="nav-actions">
+        <ul id="nav-links" class="nav-links"></ul>
+        <a href="match.html" class="btn btn-primary btn-sm">Find My Match →</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="section">
+    <div class="container">
+      <header class="page-intro">
+        <h1 class="page-title">About</h1>
+        <p class="page-sub">A non-partisan voter information tool built to compare policy alignment, not brand recognition.</p>
+      </header>
+
+      <div class="split-grid" style="margin-bottom:24px">
+        <article class="card">
+          <div class="card-head"><h2 class="sh" style="font-size:1.2rem;margin:0">What it is</h2></div>
+          <div class="card-body">
+            <p>Scot Vote Manifesto Matcher is a voter information tool for the 2026 Scottish Parliament election. It lets you choose policy topics, set your position on each, and see which parties align most closely with your priorities.</p>
+            <p>It is designed to keep the interface neutral, the scoring method visible, and the underlying source status clear when manifesto data is still pending.</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="card-head"><h2 class="sh" style="font-size:1.2rem;margin:0">What it is not</h2></div>
+          <div class="card-body">
+            <p>It is not an endorsement tool, a voting recommendation engine, or a prediction model. It does not attempt to tell users who to vote for.</p>
+            <p>It also does not hide its scoring formula. You can review the full calculation logic on the <a href="methodology.html">Methodology</a> page.</p>
+          </div>
+        </article>
+      </div>
+
+      <article class="card">
+        <div class="card-head"><h2 class="sh" style="font-size:1.2rem;margin:0">How the data works</h2></div>
+        <div class="card-body">
+            <p>Party manifesto data files provide the current best-source metadata, including whether the source is a published manifesto or a website-based estimate. Topic scores are then read from the fixed score tables in the shared runtime so the matching logic is consistent across the site.</p>
+            <p>When a party publishes a manifesto, its manifesto data can be updated and the site will reflect that change on the next deployment. If you spot something that needs correction, use the <a href="contact.html">Contact</a> page.</p>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer id="site-footer"></footer>
+
+  <script src="main.js"></script>
+  <script>
+    initNav("about");
+    initFooter();
+  </script>
+</body>
+</html>

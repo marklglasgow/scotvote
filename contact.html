@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact – Scot Vote Manifesto Matcher</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav class="site-nav">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-brand">
+        <img src="logo-icon.png" alt="Scot Vote Manifesto Matcher logo" style="height:42px;width:auto;display:block">
+        <div>
+          <span class="nav-brand-text">Scot Vote</span>
+          <span class="nav-brand-sub">Manifesto Matcher</span>
+        </div>
+      </a>
+      <div class="nav-actions">
+        <ul id="nav-links" class="nav-links"></ul>
+        <a href="match.html" class="btn btn-primary btn-sm">Find My Match →</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="section">
+    <div class="container">
+      <header class="page-intro">
+        <h1 class="page-title">Contact</h1>
+        <p class="page-sub">Use the form below to open your email client with a pre-filled message. No server-side form processing is required.</p>
+      </header>
+      <div class="banner banner-info mb8">
+        <div class="banner-icon">ℹ️</div>
+        <div>This form uses a mailto link to draft an email in your mail client. The site does not store submissions.</div>
+      </div>
+
+      <div class="contact-grid">
+        <article class="card">
+          <div class="card-head"><h2 class="sh" style="font-size:1.2rem;margin:0">Get in touch</h2></div>
+          <div class="card-body">
+            <div id="form-success" class="banner banner-info" style="display:none;margin-bottom:18px">
+              <div class="banner-icon">✓</div>
+              <div>Your email draft has been opened. If nothing happened, email <span class="mono-link">hello@manifestomatch.scot</span> directly.</div>
+            </div>
+            <form id="contact-form">
+              <div class="form-group">
+                <label class="form-label" for="name">Name</label>
+                <input class="form-input" id="name" name="name" type="text" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="email">Email</label>
+                <input class="form-input" id="email" name="email" type="email" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="topic">Topic</label>
+                <select class="form-select" id="topic" name="topic" required>
+                  <option value="Score correction">Score correction</option>
+                  <option value="Suggest new topic">Suggest new topic</option>
+                  <option value="Manifesto published">Manifesto published</option>
+                  <option value="Bug">Bug</option>
+                  <option value="Media">Media</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="message">Message</label>
+                <textarea class="form-textarea" id="message" name="message" required></textarea>
+              </div>
+              <button class="btn btn-primary" type="submit">Open email draft →</button>
+            </form>
+          </div>
+        </article>
+
+        <div class="contact-side-stack">
+          <article class="card">
+            <div class="card-head"><h2 class="sh" style="font-size:1.2rem;margin:0">Reasons to contact</h2></div>
+            <div class="card-body">
+              <div class="reason-list">
+                <div class="reason-item"><div>📊</div><div><strong>Score corrections</strong><br>Flag any score that looks inconsistent with a published source.</div></div>
+                <div class="reason-item"><div>📄</div><div><strong>Manifesto published</strong><br>Let us know when a party releases a new manifesto source file.</div></div>
+                <div class="reason-item"><div>💡</div><div><strong>Topic suggestions</strong><br>Suggest additional policy topics for future revisions.</div></div>
+                <div class="reason-item"><div>🐛</div><div><strong>Technical issues</strong><br>Report bugs, broken links or accessibility problems.</div></div>
+              </div>
+            </div>
+          </article>
+          <article class="card">
+            <div class="card-head"><h2 class="sh" style="font-size:1.2rem;margin:0">Our commitment</h2></div>
+            <div class="card-body">
+              <p>We aim to respond to questions, corrections and publication notices within 5 working days.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer id="site-footer"></footer>
+
+  <script src="main.js"></script>
+  <script>
+    initNav("contact");
+    initFooter();
+
+    byId("contact-form").addEventListener("submit", (event) => {
+      event.preventDefault();
+      const name = byId("name").value.trim();
+      const email = byId("email").value.trim();
+      const topic = byId("topic").value;
+      const message = byId("message").value.trim();
+      const subject = encodeURIComponent(`Scot Vote Manifesto Matcher: ${topic}`);
+      const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nTopic: ${topic}\n\nMessage:\n${message}`);
+      window.location.href = `mailto:hello@manifestomatch.scot?subject=${subject}&body=${body}`;
+      byId("contact-form").style.opacity = "0.5";
+      byId("contact-form").style.pointerEvents = "none";
+      byId("form-success").style.display = "";
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Parties – Scot Vote Manifesto Matcher</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .party-cell { display:flex; align-items:center; gap:12px; }
+    .m-published { color: var(--ok); font-weight:700; }
+    .m-pending { color: var(--warn); font-weight:700; }
+    .m-link { display:inline-block; margin-top:5px; font-size:.78rem; }
+    .m-note { display:block; margin-top:5px; color: var(--text-muted); font-size:.78rem; font-style:italic; }
+    .site-link { color: var(--accent); }
+  </style>
+</head>
+<body>
+  <nav class="site-nav">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-brand">
+        <img src="logo-icon.png" alt="Scot Vote Manifesto Matcher logo" style="height:42px;width:auto;display:block">
+        <div>
+          <span class="nav-brand-text">Scot Vote</span>
+          <span class="nav-brand-sub">Manifesto Matcher</span>
+        </div>
+      </a>
+      <div class="nav-actions">
+        <ul id="nav-links" class="nav-links"></ul>
+        <a href="match.html" class="btn btn-primary btn-sm">Find My Match →</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="section">
+    <div class="container">
+      <header class="page-intro">
+        <h1 class="page-title">Parties & Manifestos</h1>
+        <p class="page-sub">The matcher uses published manifesto scores when a manifesto is available. Otherwise it uses website and campaign material scores until an official manifesto is published.</p>
+      </header>
+      <div class="banner banner-info mb8">
+        <div class="banner-icon">ℹ️</div>
+        <div>Two-tier data approach: published manifestos take priority when available. If a party has not yet published a manifesto, its score is estimated from website and campaign material until the party manifesto is published.</div>
+      </div>
+      <table class="pty-table">
+        <thead>
+          <tr>
+            <th>Party</th>
+            <th>Leader</th>
+            <th>Score Source</th>
+            <th>Website</th>
+          </tr>
+        </thead>
+        <tbody id="party-tbody"></tbody>
+      </table>
+    </div>
+  </main>
+
+  <footer id="site-footer"></footer>
+
+  <script src="main.js"></script>
+  <script>
+    initNav("parties");
+    initFooter();
+
+    function esc(value) {
+      return String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+    }
+
+    loadData()
+      .then(() => {
+        byId("party-tbody").innerHTML = PARTIES.map((p) => `
+          <tr>
+            <td>
+              <div class="party-cell">
+                ${logo(p.id, true)}
+                <strong>${esc(p.name)}</strong>
+              </div>
+            </td>
+            <td>${esc(p.leader)}</td>
+            <td>
+              ${p.manifestoStatus === "published"
+                ? `<div class="m-published">✓ Published Manifesto</div><span class="source-tag source-manifesto" style="margin-left:0;margin-top:6px">Manifesto</span><div class="m-link"><a href="${p.manifestoUrl}" target="_blank" rel="noopener">Open manifesto PDF</a></div>`
+                : `<div class="m-pending">Not Published</div><span class="source-tag source-website" style="margin-left:0;margin-top:6px">Website & Campaign</span><span class="m-note">Current score is estimated until a published manifesto is added.</span>`}
+            </td>
+            <td><a class="site-link" href="${p.web}" target="_blank" rel="noopener">${esc(p.web.replace(/^https?:\/\//, ""))}</a></td>
+          </tr>
+        `).join("");
+      })
+      .catch(() => showLoadError("We couldn't load the party data for the parties page."));
+  </script>
+</body>
+</html>

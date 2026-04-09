@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Results – Scot Vote Manifesto Matcher</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav class="site-nav">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-brand">
+        <img src="logo-icon.png" alt="Scot Vote Manifesto Matcher logo" style="height:42px;width:auto;display:block">
+        <div>
+          <span class="nav-brand-text">Scot Vote</span>
+          <span class="nav-brand-sub">Manifesto Matcher</span>
+        </div>
+      </a>
+      <div class="nav-actions">
+        <ul id="nav-links" class="nav-links"></ul>
+        <a href="match.html" class="btn btn-primary btn-sm">Find My Match →</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="section">
+    <div class="container">
+      <header class="res-head">
+        <h1 class="page-title" style="margin-bottom:10px">Your Results</h1>
+        <p class="page-sub" style="margin:0 auto">These match scores are calculated only from the topics you selected, your chosen direction on each topic, and your stated strength of feeling.</p>
+        <div class="mt4"><a class="btn btn-outline" href="match.html">Adjust selections</a></div>
+      </header>
+      <div id="results-wrap"></div>
+    </div>
+  </main>
+
+  <footer id="site-footer"></footer>
+
+  <script src="main.js"></script>
+  <script>
+    initNav("");
+    initFooter();
+
+    function userSign(dir) {
+      return dir === "support" ? 1 : dir === "oppose" ? -1 : 0;
+    }
+
+    function scoreDirection(manifestoScore, websiteScore) {
+      const diff = manifestoScore - websiteScore;
+      if (Math.abs(diff) < 2) return null;
+      return {
+        diff,
+        direction: diff > 0
+          ? "more supportive in their manifesto than their website suggests"
+          : "less supportive in their manifesto than their website suggests",
+        mLbl: SCORE_LABEL[manifestoScore],
+        wLbl: SCORE_LABEL[websiteScore]
+      };
+    }
+
+    function buildDetailRows(rows, heading) {
+      if (!rows.length) {
+        return "";
+      }
+      return `
+        <div class="detail-section-title">${heading}</div>
+        ${rows.map((row) => `
+          <div class="detail-row">
+            <div>${row.topic.icon}</div>
+            <div class="dr-name">${escapeHtml(row.topic.name)}</div>
+            <div class="dr-meta">You: ${escapeHtml(dirLabel(row.topic, row.dir))} (${row.str}/5) · Party manifesto: ${row.ps}/5</div>
+          </div>
+        `).join("")}
+      `;
+    }
+
+    function discrepancyBlock(partyItem, selectedTopics) {
+      if (partyItem.manifestoStatus !== "published") {
+        return "";
+      }
+      const rows = selectedTopics.map((t) => {
+        const match = scoreDirection(t.partyScores[partyItem.id], t.partyWebsiteScores[partyItem.id]);
+        return match ? { topic: t, ...match } : null;
+      }).filter(Boolean);
+      if (!rows.length) {
+        return "";
+      }
+      return `
+        <div class="discrepancy-block">
+          <div class="disc-title">ℹ️ Manifesto vs website differences on your topics</div>
+          <div class="disc-detail" style="margin-bottom:12px">Your match score uses the manifesto score where a manifesto exists. This block shows where the party's published manifesto differs meaningfully from its public website messaging on topics you selected.</div>
+          ${rows.map((row) => `
+            <div class="disc-row">
+              <div>${row.topic.icon}</div>
+              <div class="disc-topic">${escapeHtml(row.topic.name)}</div>
+              <div class="disc-detail">Manifesto: ${escapeHtml(row.mLbl)} <span class="disc-arrow">vs</span> Website: ${escapeHtml(row.wLbl)} — ${escapeHtml(row.direction)}.</div>
+            </div>
+          `).join("")}
+        </div>
+      `;
+    }
+
+    function renderResults(results, selectedTopics, userPos) {
+      byId("results-wrap").innerHTML = results.map((item, index) => {
+        const medal = ["🥇", "🥈", "🥉"][index] || String(index + 1);
+        const cls = ["gold", "silver", "bronze"][index] || "";
+        const top = item.breakdown.filter((x) => x.mc > 0).sort((a, b) => b.mc - a.mc).slice(0, 3);
+        const mismatch = item.breakdown.filter((x) => x.mc < 0).sort((a, b) => a.mc - b.mc).slice(0, 3);
+        const sourceTag = item.party.manifestoStatus === "published"
+          ? '<span class="source-tag source-manifesto">📄 Manifesto</span>'
+          : '<span class="source-tag source-website">🌐 Website</span>';
+        const estimated = item.party.estimated ? '<span class="badge badge-pending">Estimated</span>' : "";
+        const missingManifestoBanner = item.party.manifestoStatus !== "published"
+          ? `<div class="banner banner-warn mt4"><div class="banner-icon">⚠️</div><div>No manifesto published yet. This match is based on the party's website and campaign materials.</div></div>`
+          : "";
+
+        return `
+          <article class="res-card ${cls}">
+            <div class="res-top">
+              <div class="res-rank">${medal}</div>
+              <div>${logo(item.party.id)}</div>
+              <div class="res-party">
+                <div class="res-name">${escapeHtml(item.party.name)} ${sourceTag} ${estimated}</div>
+                <div class="res-lead">${escapeHtml(item.party.leader)}</div>
+              </div>
+              <div class="res-score-box">
+                <div class="res-score">${item.norm}%</div>
+                <div class="res-score-lbl">Match score</div>
+              </div>
+            </div>
+            <div class="res-bar"><div class="res-fill" style="width:0%" data-w="${item.norm}"></div></div>
+            <button class="expand-btn" type="button" onclick="toggleDetail('${item.party.id}', this)">▸ Show breakdown</button>
+            <div id="det-${item.party.id}" class="res-detail">
+              ${buildDetailRows(top, "Top alignments")}
+              ${buildDetailRows(mismatch, "Key mismatches")}
+              ${missingManifestoBanner}
+              ${discrepancyBlock(item.party, selectedTopics)}
+              <div class="detail-section-title">Sources</div>
+              <div class="detail-row"><div class="dr-name">Party website</div><div class="dr-meta"><a href="${item.party.web}" target="_blank" rel="noopener">${escapeHtml(item.party.web.replace(/^https?:\/\//, ""))}</a></div></div>
+              ${item.party.manifestoUrl ? `<div class="detail-row"><div class="dr-name">Manifesto link</div><div class="dr-meta"><a href="${item.party.manifestoUrl}" target="_blank" rel="noopener">Open manifesto</a></div></div>` : ""}
+            </div>
+          </article>
+        `;
+      }).join("");
+
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        document.querySelectorAll(".res-fill[data-w]").forEach((el) => {
+          el.style.width = `${el.dataset.w}%`;
+        });
+      }));
+    }
+
+    function calcAndRender() {
+      const sel = JSON.parse(sessionStorage.getItem("mm_sel"));
+      const userPos = JSON.parse(sessionStorage.getItem("mm_pos"));
+      const selectedTopics = sel.map((id) => topic(id)).filter(Boolean);
+
+      const scored = PARTIES.map((p) => {
+        let pms = 0;
+        const breakdown = selectedTopics.map((t) => {
+          const ps = t.partyScores[p.id];
+          const str = userPos[t.id].str;
+          const dir = userPos[t.id].dir;
+          const mc = str * (ps - 3) * userSign(dir);
+          pms += mc;
+          return { topic: t, ps, str, dir, mc };
+        });
+        return { party: p, pms, breakdown };
+      });
+
+      const max = Math.max(...scored.map((x) => x.pms));
+      const min = Math.min(...scored.map((x) => x.pms));
+      const range = max - min;
+      const ranked = scored.map((item) => ({
+        ...item,
+        norm: range <= 0 ? 50 : Math.round(((item.pms - min) / range) * 100)
+      })).sort((a, b) => b.norm - a.norm);
+
+      renderResults(ranked, selectedTopics, userPos);
+    }
+
+    function showMissingState() {
+      byId("results-wrap").innerHTML = `
+        <div class="banner banner-warn">
+          <div class="banner-icon">⚠️</div>
+          <div>No results found. Start from <a href="match.html">match.html</a> to choose topics and calculate your match.</div>
+        </div>
+      `;
+    }
+
+    function toggleDetail(id, btn) {
+      const panel = byId(`det-${id}`);
+      const open = panel.classList.toggle("open");
+      btn.textContent = open ? "▾ Hide breakdown" : "▸ Show breakdown";
+    }
+
+    window.toggleDetail = toggleDetail;
+
+    const storedParties = sessionStorage.getItem("mm_parties");
+    const storedTopics = sessionStorage.getItem("mm_topics");
+    const storedSel = sessionStorage.getItem("mm_sel");
+    const storedPos = sessionStorage.getItem("mm_pos");
+
+    if (!storedParties || !storedTopics || !storedSel || !storedPos) {
+      showMissingState();
+    } else {
+      PARTIES = JSON.parse(storedParties);
+      TOPICS = JSON.parse(storedTopics);
+      calcAndRender();
+    }
+  </script>
+</body>
+</html>

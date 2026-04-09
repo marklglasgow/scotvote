@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Find My Match – Scot Vote Manifesto Matcher</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav class="site-nav">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-brand">
+        <img src="logo-icon.png" alt="Scot Vote Manifesto Matcher logo" style="height:42px;width:auto;display:block">
+        <div>
+          <span class="nav-brand-text">Scot Vote</span>
+          <span class="nav-brand-sub">Manifesto Matcher</span>
+        </div>
+      </a>
+      <div class="nav-actions">
+        <ul id="nav-links" class="nav-links"></ul>
+        <a href="match.html" class="btn btn-primary btn-sm">Find My Match →</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="section">
+    <div class="container">
+      <header class="page-intro">
+        <h1 class="page-title">Find My Match</h1>
+        <p class="page-sub">Choose up to 10 topics, set how you feel about each one, and compare your priorities with six parties using the published methodology.</p>
+      </header>
+
+      <div class="stepper">
+        <div id="si-1" class="step-item active">
+          <div class="step-circle">1</div>
+          <div class="step-label">Choose Topics</div>
+        </div>
+        <div id="si-2" class="step-item">
+          <div class="step-circle">2</div>
+          <div class="step-label">Set Positions</div>
+        </div>
+      </div>
+
+      <section id="step-1">
+        <div class="sel-counter">
+          <div class="sel-count"><span id="cnt">0</span> / 10 topics selected</div>
+          <button id="btn-next" class="btn btn-primary" type="button" disabled>Set Positions →</button>
+        </div>
+        <div id="topic-alert" class="banner banner-warn" style="display:none;margin-bottom:16px">
+          <div class="banner-icon">⚠️</div>
+          <div>You can select up to 10 topics. Deselect one to add another.</div>
+        </div>
+        <div id="pri-grid" class="pri-grid"></div>
+      </section>
+
+      <section id="step-2" style="display:none">
+        <div class="mb4"><button class="btn btn-outline btn-sm" type="button" id="btn-back">← Back to topic selection</button></div>
+        <article class="card">
+          <div class="card-head">
+            <h2 class="sh" style="font-size:1.4rem;margin:0">Your Position on Each Topic</h2>
+          </div>
+          <div class="card-body">
+            <div id="pos-container"></div>
+            <div class="tc" style="text-align:right;margin-top:20px">
+              <button class="btn btn-primary btn-lg" type="button" id="btn-results">Calculate My Match →</button>
+            </div>
+          </div>
+        </article>
+      </section>
+    </div>
+  </main>
+
+  <footer id="site-footer"></footer>
+
+  <script src="main.js"></script>
+  <script>
+    initNav("match");
+    initFooter();
+
+    const sel = new Set();
+    const userPos = {};
+
+    function updateCounter() {
+      byId("cnt").textContent = sel.size;
+      byId("btn-next").disabled = sel.size < 1;
+    }
+
+    function cardTick(picked) {
+      return picked ? '<svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 5.5L4.5 8L9 3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>' : "";
+    }
+
+    function renderGrid() {
+      byId("pri-grid").innerHTML = TOPICS.map((t) => {
+        const picked = sel.has(t.id);
+        return `
+          <article class="pri-card ${picked ? "picked" : ""}" data-id="${t.id}" tabindex="0" role="button" aria-pressed="${picked}">
+            <div class="pri-tick">${cardTick(picked)}</div>
+            <div class="pri-icon">${t.icon}</div>
+            <div class="pri-name">${escapeHtml(t.name)}</div>
+            <div class="pri-desc">${escapeHtml(t.desc)}</div>
+          </article>
+        `;
+      }).join("");
+      updateCounter();
+    }
+
+    function toggleTopic(id) {
+      const alert = byId("topic-alert");
+      alert.style.display = "none";
+      if (sel.has(id)) {
+        sel.delete(id);
+      } else if (sel.size >= 10) {
+        alert.style.display = "";
+        return;
+      } else {
+        sel.add(id);
+      }
+      renderGrid();
+    }
+
+    function renderPos() {
+      const ordered = [...sel].map((id) => topic(id)).filter(Boolean);
+      byId("pos-container").innerHTML = ordered.map((t) => {
+        const current = userPos[t.id];
+        return `
+          <div class="pos-row">
+            <div class="pos-title"><span>${t.icon}</span><span>${escapeHtml(t.name)}</span></div>
+            <div class="pos-desc">${escapeHtml(t.desc)}</div>
+            <div class="dir-btns">
+              <button type="button" class="dir-btn ${current.dir === "support" ? "d-sup" : ""}" onclick="setDir('${t.id}','support')">${escapeHtml(t.questionLabels.support)}</button>
+              <button type="button" class="dir-btn ${current.dir === "neutral" ? "d-neut" : ""}" onclick="setDir('${t.id}','neutral')">${escapeHtml(t.questionLabels.neutral)}</button>
+              <button type="button" class="dir-btn ${current.dir === "oppose" ? "d-opp" : ""}" onclick="setDir('${t.id}','oppose')">${escapeHtml(t.questionLabels.oppose)}</button>
+            </div>
+            <div class="str-row">
+              <div class="str-label">How important is this to you?</div>
+              <div class="str-dots">
+                ${[1, 2, 3, 4, 5].map((n) => `<button type="button" class="str-dot ${current.str === n ? "active" : ""}" onclick="setStr('${t.id}',${n})">${n}</button>`).join("")}
+              </div>
+              <div class="str-label">${strLbl(current.str)}</div>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function setDir(id, dir) {
+      userPos[id].dir = dir;
+      renderPos();
+    }
+
+    function setStr(id, n) {
+      userPos[id].str = n;
+      renderPos();
+    }
+
+    function toStep2() {
+      if (!sel.size) return;
+      byId("step-1").style.display = "none";
+      byId("step-2").style.display = "";
+      byId("si-1").className = "step-item done";
+      byId("si-1").querySelector(".step-circle").textContent = "✓";
+      byId("si-2").className = "step-item active";
+      renderPos();
+      window.scrollTo(0, 0);
+    }
+
+    function toStep1() {
+      byId("step-1").style.display = "";
+      byId("step-2").style.display = "none";
+      byId("si-1").className = "step-item active";
+      byId("si-1").querySelector(".step-circle").textContent = "1";
+      byId("si-2").className = "step-item";
+      window.scrollTo(0, 0);
+    }
+
+    function goToResults() {
+      sessionStorage.setItem("mm_sel", JSON.stringify([...sel]));
+      sessionStorage.setItem("mm_pos", JSON.stringify(userPos));
+      sessionStorage.setItem("mm_parties", JSON.stringify(PARTIES));
+      sessionStorage.setItem("mm_topics", JSON.stringify(TOPICS));
+      window.location.href = "results.html";
+    }
+
+    loadData()
+      .then(() => {
+        TOPICS.forEach((t) => { userPos[t.id] = { dir: "support", str: 3 }; });
+        renderGrid();
+      })
+      .catch(() => showLoadError("We couldn't load the topic and party data for the match flow."));
+
+    byId("pri-grid").addEventListener("click", (event) => {
+      const card = event.target.closest(".pri-card");
+      if (card) toggleTopic(card.dataset.id);
+    });
+    byId("pri-grid").addEventListener("keydown", (event) => {
+      const card = event.target.closest(".pri-card");
+      if (card && (event.key === "Enter" || event.key === " ")) {
+        event.preventDefault();
+        toggleTopic(card.dataset.id);
+      }
+    });
+    byId("btn-next").addEventListener("click", toStep2);
+    byId("btn-back").addEventListener("click", toStep1);
+    byId("btn-results").addEventListener("click", goToResults);
+    window.setDir = setDir;
+    window.setStr = setStr;
+  </script>
+</body>
+</html>

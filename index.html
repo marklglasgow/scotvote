@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scot Vote Manifesto Matcher</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav class="site-nav">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-brand">
+        <img src="logo-icon.png" alt="Scot Vote Manifesto Matcher logo" style="height:42px;width:auto;display:block">
+        <div>
+          <span class="nav-brand-text">Scot Vote</span>
+          <span class="nav-brand-sub">Manifesto Matcher</span>
+        </div>
+      </a>
+      <div class="nav-actions">
+        <ul id="nav-links" class="nav-links"></ul>
+        <a href="match.html" class="btn btn-primary btn-sm">Find My Match →</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="hero-inner">
+        <img src="logo.png" alt="Scot Vote Manifesto Matcher logo" style="height:160px;width:auto;display:block;margin-bottom:28px">
+        <div class="hero-eye">Scottish Parliament Election 2026</div>
+        <h1>Which party shares your priorities?</h1>
+        <p class="hero-sub">Pick the issues that matter most to you, set your position, and we'll rank the parties by how closely they align with your views.</p>
+        <div class="hero-ctas">
+          <a href="match.html" class="btn btn-primary btn-lg">Start Matching →</a>
+          <a href="parties.html" class="btn btn-ghost btn-lg">View Parties</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:24px">
+      <div class="container">
+        <div class="banner banner-warn">
+          <div class="banner-icon">⚠️</div>
+          <div>Manifestos in progress: Not all parties have published their 2026 manifesto yet. Where a manifesto is not available, scores are based on the party's website and campaign materials.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container tc">
+        <h2 class="sh">How It Works</h2>
+        <p class="sh-s">A simple three-step process, built to keep methodology transparent and party branding out of the interface.</p>
+        <div class="how-grid">
+          <article class="how-card">
+            <div class="how-num">01</div>
+            <h3>Choose your topics</h3>
+            <p>Select up to 10 policy areas that matter most to you, from healthcare and housing to climate and taxation.</p>
+          </article>
+          <article class="how-card">
+            <div class="how-num">02</div>
+            <h3>Set your position</h3>
+            <p>For each topic, choose the direction you favour and how strongly you feel about it.</p>
+          </article>
+          <article class="how-card">
+            <div class="how-num">03</div>
+            <h3>See your match</h3>
+            <p>Get a ranked results list with score breakdowns, data sources and any manifesto-versus-website differences.</p>
+          </article>
+        </div>
+        <a href="match.html" class="btn btn-primary btn-lg">Get Started →</a>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2 class="sh">Parties Included</h2>
+        <p class="sh-s mb8">Rendered automatically from the current party data files so manifesto publication status updates with the underlying manifesto data.</p>
+        <div id="home-party-grid" class="party-grid"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="site-footer"></footer>
+
+  <script src="main.js"></script>
+  <script>
+    initNav("home");
+    initFooter();
+
+    loadData()
+      .then(() => {
+        byId("home-party-grid").innerHTML = PARTIES.map((p) => `
+          <article class="card party-card">
+            <div class="party-card-head">
+              ${logo(p.id)}
+              <div>
+                <div class="party-card-name">${escapeHtml(p.name)}</div>
+                <div class="party-card-meta">${escapeHtml(p.leader)}</div>
+              </div>
+            </div>
+            <div>${p.manifestoStatus === "published"
+              ? '<span class="badge badge-published">✓ Manifesto Published</span>'
+              : '<span class="badge badge-pending">⏳ Manifesto Pending</span>'}</div>
+          </article>
+        `).join("");
+      })
+      .catch(() => showLoadError("We couldn't load the party data for the homepage."));
+  </script>
+</body>
+</html>

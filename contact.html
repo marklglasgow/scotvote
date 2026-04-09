@@ -94,6 +94,9 @@
           </article>
         </div>
       </div>
+      <section class="section share-panel" id="share-section">
+        <div data-share-mount></div>
+      </section>
     </div>
   </main>
 
@@ -103,6 +106,8 @@
   <script>
     initNav("contact");
     initFooter();
+    initShareLinks();
+    initShareAction();
 
     byId("contact-form").addEventListener("submit", (event) => {
       event.preventDefault();

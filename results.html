@@ -34,6 +34,9 @@
         <div class="mt4"><a class="btn btn-outline" href="match.html">Adjust selections</a></div>
       </header>
       <div id="results-wrap"></div>
+      <section class="section share-panel" id="share-section">
+        <div data-share-mount></div>
+      </section>
     </div>
   </main>
 
@@ -43,6 +46,8 @@
   <script>
     initNav("");
     initFooter();
+    initShareLinks();
+    initShareAction();
 
     function userSign(dir) {
       return dir === "support" ? 1 : dir === "oppose" ? -1 : 0;

@@ -70,6 +70,10 @@
           </div>
         </article>
       </section>
+
+      <section class="section share-panel" id="share-section">
+        <div data-share-mount></div>
+      </section>
     </div>
   </main>
 
@@ -79,6 +83,8 @@
   <script>
     initNav("match");
     initFooter();
+    initShareLinks();
+    initShareAction();
 
     const sel = new Set();
     const userPos = {};

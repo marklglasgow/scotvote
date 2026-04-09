@@ -55,6 +55,9 @@
         </thead>
         <tbody id="party-tbody"></tbody>
       </table>
+      <section class="section share-panel" id="share-section">
+        <div data-share-mount></div>
+      </section>
     </div>
   </main>
 
@@ -64,6 +67,8 @@
   <script>
     initNav("parties");
     initFooter();
+    initShareLinks();
+    initShareAction();
 
     function esc(value) {
       return String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");

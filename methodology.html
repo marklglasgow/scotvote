@@ -83,6 +83,9 @@ else:
         <p>The site is non-partisan and shows its scoring method publicly. Scores are only as current as the underlying manifesto data and published sources. Where a party has not published a manifesto, its score is labelled as estimated and derived from public website and campaign material.</p>
         <p>When a published manifesto differs meaningfully from website messaging on a topic you selected, the results page flags that discrepancy separately so the scoring source remains visible.</p>
       </section>
+      <section class="section share-panel" id="share-section">
+        <div data-share-mount></div>
+      </section>
     </div>
   </main>
 
@@ -92,6 +95,8 @@ else:
   <script>
     initNav("methodology");
     initFooter();
+    initShareLinks();
+    initShareAction();
   </script>
 </body>
 </html>

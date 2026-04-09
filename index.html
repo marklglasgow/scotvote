@@ -81,6 +81,12 @@
         <div id="home-party-grid" class="party-grid"></div>
       </div>
     </section>
+
+    <section class="section share-panel" id="share-section">
+      <div class="container">
+        <div data-share-mount></div>
+      </div>
+    </section>
   </main>
 
   <footer id="site-footer"></footer>
@@ -89,6 +95,8 @@
   <script>
     initNav("home");
     initFooter();
+    initShareLinks();
+    initShareAction();
 
     loadData()
       .then(() => {

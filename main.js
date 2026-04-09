@@ -53,8 +53,8 @@ const INLINE_DATA = {
     { analysis_source: "website_structured", party: { party_name: "Scottish National Party", party_website: "https://www.snp.org", party_leader: "John Swinney" }, sources: [{ source_id: "snp-site", title: "SNP", url: "https://www.snp.org" }] },
     { analysis_source: "manifesto", party: { party_name: "Scottish Conservatives", party_website: "https://www.scottishconservatives.com", party_leader: "Russell Findlay" }, sources: [{ source_id: "con-manifesto-2026", title: "Get Scotland Working: The Scottish Conservative and Unionist Party Manifesto 2026", url: "https://www.scottishconservatives.com/wp-content/uploads/2026/04/Web-SCUP-Manifesto-2026.pdf" }] },
     { analysis_source: "website_structured", party: { party_name: "Scottish Liberal Democrats", party_website: "https://www.scotlibdems.org.uk", party_leader: "Alex Cole-Hamilton" }, sources: [{ source_id: "ld-site", title: "Scottish Liberal Democrats", url: "https://www.scotlibdems.org.uk" }] },
-    { analysis_source: "manifesto", party: { party_name: "Reform UK Scotland", party_website: "https://reformuk.scot/", party_leader: "Nigel Farage" }, sources: [{ source_id: "reform-manifesto", title: "Reform UK Scotland Manifesto", url: "https://reformuk.scot/wp-content/uploads/2026/04/Reform-UK-Scotland-Manifesto-2026.pdf" }] },
-    { analysis_source: "website_structured", party: { party_name: "Scottish Greens", party_website: "https://greens.scot", party_leader: "Lorna Slater and Patrick Harvie" }, sources: [{ source_id: "greens-site", title: "Scottish Greens", url: "https://greens.scot" }] }
+    { analysis_source: "manifesto", party: { party_name: "Reform UK Scotland", party_website: "https://reformuk.scot/", party_leader: "Malcolm Offord" }, sources: [{ source_id: "reform-manifesto", title: "Reform UK Scotland Manifesto", url: "https://reformuk.scot/wp-content/uploads/2026/04/Reform-UK-Scotland-Manifesto-2026.pdf" }] },
+    { analysis_source: "website_structured", party: { party_name: "Scottish Greens", party_website: "https://greens.scot", party_leader: "Gillian Mackay and Ross Greer" }, sources: [{ source_id: "greens-site", title: "Scottish Greens", url: "https://greens.scot" }] }
   ]
 };
 
@@ -158,7 +158,8 @@ function initNav(pageId) {
     { href: "parties.html", label: "Parties", id: "parties" },
     { href: "methodology.html", label: "Methodology", id: "methodology" },
     { href: "about.html", label: "About", id: "about" },
-    { href: "contact.html", label: "Contact", id: "contact" }
+    { href: "contact.html", label: "Contact", id: "contact" },
+    { href: "#", label: "Share", id: "share" }
   ];
 
   nav.innerHTML = links.map((link) => `<li><a href="${link.href}"${pageId === link.id ? ' class="active"' : ""}>${link.label}</a></li>`).join("");
@@ -199,4 +200,62 @@ function showLoadError(msg) {
       </div>
     </main>
   `;
+}
+
+function initShareLinks() {
+  const containers = document.querySelectorAll("[data-share-mount]");
+  if (!containers.length) {
+    return;
+  }
+
+  const url = encodeURIComponent(window.location.href);
+  const title = document.title.replace(/\s+[–-]\s+Scot Vote Manifesto Matcher$/, "").trim() || "Scot Vote Manifesto Matcher";
+  const text = encodeURIComponent(`${title} on Scot Vote Manifesto Matcher`);
+  const markup = `
+    <div class="share-bar">
+      <div class="share-label">Share this page</div>
+      <a class="share-btn" href="https://twitter.com/intent/tweet?url=${url}&text=${text}" target="_blank" rel="noopener">X</a>
+      <a class="share-btn" href="https://bsky.app/intent/compose?text=${text}%20${url}" target="_blank" rel="noopener">Bluesky</a>
+      <a class="share-btn" href="https://www.facebook.com/sharer/sharer.php?u=${url}" target="_blank" rel="noopener">Facebook</a>
+      <a class="share-btn" href="https://wa.me/?text=${text}%20${url}" target="_blank" rel="noopener">WhatsApp</a>
+    </div>
+  `;
+
+  containers.forEach((container) => {
+    container.innerHTML = markup;
+  });
+}
+
+function showCopyToast(message) {
+  let toast = byId("copy-toast");
+  if (!toast) {
+    toast = document.createElement("div");
+    toast.id = "copy-toast";
+    toast.className = "copy-toast";
+    document.body.appendChild(toast);
+  }
+  toast.textContent = message;
+  toast.classList.add("show");
+  clearTimeout(showCopyToast._timer);
+  showCopyToast._timer = setTimeout(() => {
+    toast.classList.remove("show");
+  }, 1800);
+}
+
+function initShareAction() {
+  const shareLink = Array.from(document.querySelectorAll("#nav-links a")).find((a) => a.textContent.trim() === "Share");
+  if (!shareLink) {
+    return;
+  }
+
+  shareLink.addEventListener("click", async (event) => {
+    event.preventDefault();
+    const text = "Try this site to see what party matches your priorities: https://scotvote.vercel.app";
+    try {
+      await navigator.clipboard.writeText(text);
+      showCopyToast("Text copied to clipboard");
+    } catch (_error) {
+      showCopyToast("Unable to copy text");
+    }
+  });
 }

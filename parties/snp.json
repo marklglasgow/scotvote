@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0",
+  "analysis_id": "snp-scotland-2026-v1",
+  "analysis_source": "website_structured",
+  "confidence_level": "medium_high",
+  "party": {
+    "party_name": "Scottish National Party",
+    "party_website": "https://www.snp.org",
+    "party_leader": "John Swinney"
+  },
+  "sources": [
+    {
+      "source_id": "snp-site",
+      "title": "SNP",
+      "url": "https://www.snp.org"
+    }
+  ],
+  "priorities": []
+}

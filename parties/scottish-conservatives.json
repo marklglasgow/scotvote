@@ -1,0 +1,60 @@
+{
+  "schema_version": "1.0",
+  "analysis_id": "con-scotland-2026-v1",
+  "analysis_source": "manifesto",
+  "confidence_level": "high",
+  "party": {
+    "party_name": "Scottish Conservatives",
+    "party_website": "https://www.scottishconservatives.com",
+    "party_leader": "Russell Findlay"
+  },
+  "sources": [
+    {
+      "source_id": "con-manifesto-2026",
+      "title": "Get Scotland Working: The Scottish Conservative and Unionist Party Manifesto 2026",
+      "url": "https://www.scottishconservatives.com/wp-content/uploads/2026/04/Web-SCUP-Manifesto-2026.pdf"
+    }
+  ],
+  "priorities": [
+    {
+      "priority_name": "Standing up for Scotland's place in the Union",
+      "rank": 1,
+      "focus_percentage": 14.0
+    },
+    {
+      "priority_name": "Lowering bills and delivering value for taxpayers",
+      "rank": 2,
+      "focus_percentage": 16.0
+    },
+    {
+      "priority_name": "Growing Scotland's economy",
+      "rank": 3,
+      "focus_percentage": 15.0
+    },
+    {
+      "priority_name": "Building the right infrastructure",
+      "rank": 4,
+      "focus_percentage": 12.0
+    },
+    {
+      "priority_name": "Caring for health and wellbeing",
+      "rank": 5,
+      "focus_percentage": 12.0
+    },
+    {
+      "priority_name": "Improving education at every stage of life",
+      "rank": 6,
+      "focus_percentage": 11.0
+    },
+    {
+      "priority_name": "Standing up for rights, communities and the environment",
+      "rank": 7,
+      "focus_percentage": 10.0
+    },
+    {
+      "priority_name": "Protecting the public from crime",
+      "rank": 8,
+      "focus_percentage": 10.0
+    }
+  ]
+}

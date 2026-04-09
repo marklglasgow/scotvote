@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0",
+  "analysis_id": "ld-scotland-2026-v1",
+  "analysis_source": "website_structured",
+  "confidence_level": "medium_high",
+  "party": {
+    "party_name": "Scottish Liberal Democrats",
+    "party_website": "https://www.scotlibdems.org.uk",
+    "party_leader": "Alex Cole-Hamilton"
+  },
+  "sources": [
+    {
+      "source_id": "ld-site",
+      "title": "Scottish Liberal Democrats",
+      "url": "https://www.scotlibdems.org.uk"
+    }
+  ],
+  "priorities": []
+}

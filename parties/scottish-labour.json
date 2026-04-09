@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0",
+  "analysis_id": "labour-scotland-2026-v1",
+  "analysis_source": "website_structured",
+  "confidence_level": "medium_high",
+  "party": {
+    "party_name": "Scottish Labour",
+    "party_website": "https://scottishlabour.org.uk",
+    "party_leader": "Anas Sarwar"
+  },
+  "sources": [
+    {
+      "source_id": "labour-site",
+      "title": "Scottish Labour",
+      "url": "https://scottishlabour.org.uk"
+    }
+  ],
+  "priorities": []
+}

@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0",
+  "analysis_id": "greens-scotland-2026-v1",
+  "analysis_source": "website_structured",
+  "confidence_level": "medium_high",
+  "party": {
+    "party_name": "Scottish Greens",
+    "party_website": "https://greens.scot",
+    "party_leader": "Lorna Slater and Patrick Harvie"
+  },
+  "sources": [
+    {
+      "source_id": "greens-site",
+      "title": "Scottish Greens",
+      "url": "https://greens.scot"
+    }
+  ],
+  "priorities": []
+}

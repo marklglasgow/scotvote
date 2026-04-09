@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0",
+  "analysis_id": "reform-scotland-2026-v1",
+  "analysis_source": "manifesto",
+  "confidence_level": "high",
+  "party": {
+    "party_name": "Reform UK Scotland",
+    "party_website": "https://reformuk.scot/",
+    "party_leader": "Nigel Farage"
+  },
+  "sources": [
+    {
+      "source_id": "reform-manifesto",
+      "title": "Reform UK Scotland Manifesto",
+      "url": "https://reformuk.scot/wp-content/uploads/2026/04/Reform-UK-Scotland-Manifesto-2026.pdf"
+    }
+  ],
+  "priorities": []
+}

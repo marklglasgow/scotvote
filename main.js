@@ -92,6 +92,7 @@ function convertPartyFile(raw, config) {
   return {
     id: config.id,
     short: config.short,
+    logoFile: config.logoFile,
     name: raw.party?.party_name || config.short,
     leader: raw.party?.party_leader || "TBC",
     web: raw.party?.party_website || "",

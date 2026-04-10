@@ -212,7 +212,15 @@
     if (!storedParties || !storedTopics || !storedSel || !storedPos) {
       showMissingState();
     } else {
-      PARTIES = JSON.parse(storedParties);
+      PARTIES = JSON.parse(storedParties).map((partyItem) => {
+        const config = PARTY_CONFIG.find((entry) => entry.id === partyItem.id) || {};
+        return {
+          ...partyItem,
+          short: partyItem.short || config.short,
+          logoFile: partyItem.logoFile || config.logoFile,
+          colors: partyItem.colors || config.colors
+        };
+      });
       TOPICS = JSON.parse(storedTopics);
       calcAndRender();
     }

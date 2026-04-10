@@ -660,15 +660,15 @@ main {
 }
 
 .dir-btn.d-neut {
-  background: var(--bg-subtle);
-  border-color: var(--text-muted);
-  color: var(--text-2);
+  background: var(--ok-bg);
+  border-color: var(--ok);
+  color: var(--ok);
 }
 
 .dir-btn.d-opp {
-  background: var(--err-bg);
-  border-color: var(--err);
-  color: var(--err);
+  background: var(--ok-bg);
+  border-color: var(--ok);
+  color: var(--ok);
 }
 
 .str-row {

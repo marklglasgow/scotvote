@@ -192,7 +192,7 @@
 
     loadData()
       .then(() => {
-        TOPICS.forEach((t) => { userPos[t.id] = { dir: "support", str: 3 }; });
+        TOPICS.forEach((t) => { userPos[t.id] = { dir: "neutral", str: 3 }; });
         renderGrid();
       })
       .catch(() => showLoadError("We couldn't load the topic and party data for the match flow."));

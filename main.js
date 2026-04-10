@@ -9,14 +9,14 @@ const PARTY_CONFIG = [
 
 const INLINE_TOPICS = [
   { id: "independence", name: "Scottish Independence", icon: "🏴", desc: "Scotland's constitutional future and independence planning.", questionLabels: { support: "Yes to independence", neutral: "No strong view", oppose: "No to independence" } },
-  { id: "nhs", name: "NHS & Healthcare", icon: "🏥", desc: "Funding, reform and access to health services.", questionLabels: { support: "Increase investment", neutral: "No strong view", oppose: "Reduce / reform" } },
-  { id: "education", name: "Education", icon: "🎓", desc: "Schools, universities and skills policy.", questionLabels: { support: "Increase investment", neutral: "No strong view", oppose: "Reduce / reform" } },
+  { id: "nhs", name: "NHS & Healthcare", icon: "🏥", desc: "Funding, reform and access to health services.", questionLabels: { support: "Increase investment", neutral: "No strong view", oppose: "Reduce investment" } },
+  { id: "education", name: "Education", icon: "🎓", desc: "Schools, universities and skills policy.", questionLabels: { support: "Increase investment", neutral: "No strong view", oppose: "Reduce investment" } },
   { id: "climate", name: "Climate & Environment", icon: "🌍", desc: "Net zero policy, emissions and environmental protection.", questionLabels: { support: "Prioritise action", neutral: "No strong view", oppose: "Deprioritise" } },
   { id: "economy", name: "Economy & Jobs", icon: "📈", desc: "Economic strategy, jobs and growth models.", questionLabels: { support: "State-led growth", neutral: "No strong view", oppose: "Market-led growth" } },
   { id: "housing", name: "Housing & Homelessness", icon: "🏠", desc: "Housing supply, affordability and homelessness response.", questionLabels: { support: "More social housing", neutral: "No strong view", oppose: "Market-led supply" } },
   { id: "costliving", name: "Cost of Living", icon: "🛒", desc: "Household costs, support measures and affordability.", questionLabels: { support: "More government support", neutral: "No strong view", oppose: "Reduce intervention" } },
   { id: "transport", name: "Public Transport", icon: "🚌", desc: "Rail, bus and public transport investment.", questionLabels: { support: "Expand & invest", neutral: "No strong view", oppose: "Reduce subsidy" } },
-  { id: "socialcare", name: "Social Care", icon: "🤝", desc: "Care provision, funding and support services.", questionLabels: { support: "Increase investment", neutral: "No strong view", oppose: "Reform / reduce" } },
+  { id: "socialcare", name: "Social Care", icon: "🤝", desc: "Care provision, funding and support services.", questionLabels: { support: "Increase investment", neutral: "No strong view", oppose: "Reduce investment" } },
   { id: "drugs", name: "Drug Policy Reform", icon: "💊", desc: "Approaches to treatment, public health and enforcement.", questionLabels: { support: "Decriminalise / treat", neutral: "No strong view", oppose: "Tougher enforcement" } },
   { id: "landreform", name: "Land Reform", icon: "🌾", desc: "Ownership, access and land use reform.", questionLabels: { support: "More reform", neutral: "No strong view", oppose: "Protect current ownership" } },
   { id: "policing", name: "Policing & Justice", icon: "⚖️", desc: "Police numbers, powers and justice reform.", questionLabels: { support: "More police & powers", neutral: "No strong view", oppose: "Reform-focused" } },

@@ -22,18 +22,19 @@ const INLINE_TOPICS = [
   { id: "policing", name: "Policing & Justice", icon: "⚖️", desc: "Police numbers, powers and justice reform.", questionLabels: { support: "More police & powers", neutral: "No strong view", oppose: "Reform-focused" } },
   { id: "energy", name: "Energy Policy", icon: "⚡", desc: "Energy mix, renewables and oil and gas policy.", questionLabels: { support: "Renewables-first", neutral: "No strong view", oppose: "Support oil & gas" } },
   { id: "equality", name: "Equality & Rights", icon: "🌈", desc: "Equalities law, rights protections and inclusion.", questionLabels: { support: "Strengthen protections", neutral: "No strong view", oppose: "Roll back" } },
+  { id: "transrights", name: "Trans Rights", icon: "⚧️", desc: "Legal protections, healthcare access and public policy affecting trans people.", questionLabels: { support: "Strengthen trans rights", neutral: "No strong view", oppose: "Roll back trans rights" } },
   { id: "rural", name: "Rural Affairs & Farming", icon: "🚜", desc: "Support for farming, fisheries and rural communities.", questionLabels: { support: "More rural support", neutral: "No strong view", oppose: "Reduce subsidies" } },
   { id: "immigration", name: "Immigration & Borders", icon: "🛂", desc: "Migration policy, border controls and openness.", questionLabels: { support: "More open policy", neutral: "No strong view", oppose: "Stricter controls" } },
   { id: "tax", name: "Tax & Public Spending", icon: "💷", desc: "Tax levels, public spending and fiscal choices.", questionLabels: { support: "Higher tax & spend", neutral: "No strong view", oppose: "Lower tax & spend" } }
 ];
 
 const DERIVED_SCORES = {
-  lab: { independence: 1, nhs: 5, education: 4, climate: 4, economy: 4, housing: 4, costliving: 5, transport: 4, socialcare: 5, drugs: 4, landreform: 4, policing: 4, energy: 3, equality: 4, rural: 3, immigration: 3, tax: 4 },
-  snp: { independence: 5, nhs: 4, education: 4, climate: 4, economy: 3, housing: 3, costliving: 4, transport: 3, socialcare: 4, drugs: 4, landreform: 3, policing: 3, energy: 4, equality: 4, rural: 3, immigration: 4, tax: 3 },
-  con: { independence: 1, nhs: 4, education: 4, climate: 1, economy: 1, housing: 2, costliving: 3, transport: 4, socialcare: 4, drugs: 2, landreform: 1, policing: 5, energy: 1, equality: 2, rural: 5, immigration: 2, tax: 1 },
-  ld: { independence: 2, nhs: 5, education: 4, climate: 4, economy: 3, housing: 3, costliving: 4, transport: 5, socialcare: 4, drugs: 4, landreform: 3, policing: 3, energy: 4, equality: 4, rural: 3, immigration: 3, tax: 3 },
-  ref: { independence: 1, nhs: 4, education: 3, climate: 1, economy: 1, housing: 4, costliving: 4, transport: 3, socialcare: 4, drugs: 1, landreform: 1, policing: 5, energy: 2, equality: 1, rural: 4, immigration: 1, tax: 1 },
-  grn: { independence: 4, nhs: 5, education: 4, climate: 5, economy: 3, housing: 5, costliving: 4, transport: 5, socialcare: 4, drugs: 5, landreform: 5, policing: 3, energy: 5, equality: 5, rural: 3, immigration: 4, tax: 4 }
+  lab: { independence: 1, nhs: 5, education: 4, climate: 4, economy: 4, housing: 4, costliving: 5, transport: 4, socialcare: 5, drugs: 4, landreform: 4, policing: 4, energy: 3, equality: 4, transrights: 3, rural: 3, immigration: 3, tax: 4 },
+  snp: { independence: 5, nhs: 4, education: 4, climate: 4, economy: 3, housing: 3, costliving: 4, transport: 3, socialcare: 4, drugs: 4, landreform: 3, policing: 3, energy: 4, equality: 4, transrights: 4, rural: 3, immigration: 4, tax: 3 },
+  con: { independence: 1, nhs: 4, education: 4, climate: 1, economy: 1, housing: 2, costliving: 3, transport: 4, socialcare: 4, drugs: 2, landreform: 1, policing: 5, energy: 1, equality: 2, transrights: 1, rural: 5, immigration: 2, tax: 1 },
+  ld: { independence: 2, nhs: 5, education: 4, climate: 4, economy: 3, housing: 3, costliving: 4, transport: 5, socialcare: 4, drugs: 4, landreform: 3, policing: 3, energy: 4, equality: 4, transrights: 5, rural: 3, immigration: 3, tax: 3 },
+  ref: { independence: 1, nhs: 4, education: 3, climate: 1, economy: 1, housing: 4, costliving: 4, transport: 3, socialcare: 4, drugs: 1, landreform: 1, policing: 5, energy: 2, equality: 1, transrights: 1, rural: 4, immigration: 1, tax: 1 },
+  grn: { independence: 4, nhs: 5, education: 4, climate: 5, economy: 3, housing: 5, costliving: 4, transport: 5, socialcare: 4, drugs: 5, landreform: 5, policing: 3, energy: 5, equality: 5, transrights: 5, rural: 3, immigration: 4, tax: 4 }
 };
 
 const WEBSITE_SCORES = {
@@ -49,7 +50,7 @@ const SCORE_LABEL = { 1: "strongly opposed", 2: "mild opposition", 3: "neutral /
 
 const INLINE_DATA = {
   parties: [
-    { analysis_source: "website_structured", party: { party_name: "Scottish Labour", party_website: "https://scottishlabour.org.uk", party_leader: "Anas Sarwar" }, sources: [{ source_id: "labour-site", title: "Scottish Labour", url: "https://scottishlabour.org.uk" }] },
+    { analysis_source: "manifesto", party: { party_name: "Scottish Labour", party_website: "https://scottishlabour.org.uk/", party_leader: "Anas Sarwar" }, manifesto: { manifesto_url: "https://scottishlabour.org.uk/wp-content/uploads/2026/04/Scottish-Labour-Manifesto-2026.pdf" }, sources: [{ source_id: "labour-manifesto", title: "Scottish Labour Manifesto 2026" }] },
     { analysis_source: "website_structured", party: { party_name: "Scottish National Party", party_website: "https://www.snp.org", party_leader: "John Swinney" }, sources: [{ source_id: "snp-site", title: "SNP", url: "https://www.snp.org" }] },
     { analysis_source: "manifesto", party: { party_name: "Scottish Conservatives", party_website: "https://www.scottishconservatives.com", party_leader: "Russell Findlay" }, sources: [{ source_id: "con-manifesto-2026", title: "Get Scotland Working: The Scottish Conservative and Unionist Party Manifesto 2026", url: "https://www.scottishconservatives.com/wp-content/uploads/2026/04/Web-SCUP-Manifesto-2026.pdf" }] },
     { analysis_source: "website_structured", party: { party_name: "Scottish Liberal Democrats", party_website: "https://www.scotlibdems.org.uk", party_leader: "Alex Cole-Hamilton" }, sources: [{ source_id: "ld-site", title: "Scottish Liberal Democrats", url: "https://www.scotlibdems.org.uk" }] },
@@ -89,6 +90,7 @@ function logo(partyId, sm = false) {
 
 function convertPartyFile(raw, config) {
   const isManifesto = raw.analysis_source === "manifesto";
+  const manifestoUrl = raw.sources?.[0]?.url || raw.manifesto?.manifesto_url || "";
   return {
     id: config.id,
     short: config.short,
@@ -97,7 +99,7 @@ function convertPartyFile(raw, config) {
     leader: raw.party?.party_leader || "TBC",
     web: raw.party?.party_website || "",
     manifestoStatus: isManifesto ? "published" : "pending",
-    manifestoUrl: isManifesto ? (raw.sources?.[0]?.url || "") : "",
+    manifestoUrl: isManifesto ? manifestoUrl : "",
     estimated: !isManifesto,
     topicScores: DERIVED_SCORES[config.id],
     websiteScores: WEBSITE_SCORES[config.id],

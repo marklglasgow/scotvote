@@ -55,7 +55,7 @@ const INLINE_DATA = {
     { analysis_source: "manifesto", party: { party_name: "Scottish Conservatives", party_website: "https://www.scottishconservatives.com", party_leader: "Russell Findlay" }, sources: [{ source_id: "con-manifesto-2026", title: "Get Scotland Working: The Scottish Conservative and Unionist Party Manifesto 2026", url: "https://www.scottishconservatives.com/wp-content/uploads/2026/04/Web-SCUP-Manifesto-2026.pdf" }] },
     { analysis_source: "website_structured", party: { party_name: "Scottish Liberal Democrats", party_website: "https://www.scotlibdems.org.uk", party_leader: "Alex Cole-Hamilton" }, sources: [{ source_id: "ld-site", title: "Scottish Liberal Democrats", url: "https://www.scotlibdems.org.uk" }] },
     { analysis_source: "manifesto", party: { party_name: "Reform UK Scotland", party_website: "https://reformuk.scot/", party_leader: "Malcolm Offord" }, sources: [{ source_id: "reform-manifesto", title: "Reform UK Scotland Manifesto", url: "https://reformuk.scot/wp-content/uploads/2026/04/Reform-UK-Scotland-Manifesto-2026.pdf" }] },
-    { analysis_source: "website_structured", party: { party_name: "Scottish Greens", party_website: "https://greens.scot", party_leader: "Gillian Mackay and Ross Greer" }, sources: [{ source_id: "greens-site", title: "Scottish Greens", url: "https://greens.scot" }] }
+    { analysis_source: "manifesto", party: { party_name: "Scottish Greens", party_website: "https://greens.scot/", party_leader: "Gillian Mackay and Ross Greer" }, manifesto: { manifesto_url: "https://greens.scot/sites/default/files/public/Scottish%20Greens%20Manifesto.pdf" }, sources: [{ source_id: "greens-manifesto-2026", title: "Scottish Greens Manifesto 2026", url: "https://greens.scot/sites/default/files/public/Scottish%20Greens%20Manifesto.pdf" }] }
   ]
 };
 
@@ -187,7 +187,7 @@ function initFooter() {
         <a href="about.html">About</a>
         <a href="contact.html">Contact</a>
       </div>
-      <p class="footer-copy">Not affiliated with any political party · All party scores are estimates until official manifestos are published.</p>
+      <p class="footer-copy">Not affiliated with any political party · Published manifestos are used where available, with website and campaign material used only until a manifesto is published.</p>
     </div>
   `;
 }

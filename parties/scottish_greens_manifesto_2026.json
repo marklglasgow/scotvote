@@ -8,7 +8,7 @@
     "party_name": "Scottish Greens",
     "party_short_name": "Greens",
     "party_website": "https://greens.scot/",
-    "party_leader": "Gillian Mackay and Ross Greer"
+    "party_leader": "Patrick Harvie & Lorna Slater"
   },
   "manifesto": {
     "title": "Scottish Greens Manifesto 2026",
@@ -23,15 +23,8 @@
     "weighting_method": "Page-span weighting across sections.",
     "ranking_method": "Rank combines section prominence and manifesto emphasis.",
     "position_handling": "Supportive direction inferred from policy framing.",
-    "scoring_formula": "priority_score = rank_score x focus_decimal"
+    "scoring_formula": "priority_score = rank_score × focus_decimal"
   },
-  "sources": [
-    {
-      "source_id": "greens-manifesto-2026",
-      "title": "Scottish Greens Manifesto 2026",
-      "url": "https://greens.scot/sites/default/files/public/Scottish%20Greens%20Manifesto.pdf"
-    }
-  ],
   "priorities": [
     {
       "priority_id": "greens-2026-energy-climate",
@@ -236,7 +229,6 @@
   ],
   "notes": [
     "Weights based on estimated section spans; refine with exact parsing if needed.",
-    "Manifesto strongly weighted toward climate and fairness themes.",
-    "Leader field updated to reflect the current party leadership used elsewhere on the site."
+    "Manifesto strongly weighted toward climate and fairness themes."
   ]
 }

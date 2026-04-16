@@ -14,21 +14,12 @@
     "title": "SNP Manifesto 2026",
     "election": "2026 Scottish Parliament election",
     "manifesto_url": "https://issuu.com/hinksbrandwise/docs/snp_manifesto_the_scottish_parliament_election_2",
-    "document_type": "issuu",
-    "published": true,
-    "status": "published_and_analysed"
+    "published": true
   },
   "analysis_method": {
     "weighting_method": "page_span",
-    "scoring_formula": "priority_score = rank_score x focus_decimal"
+    "scoring_formula": "priority_score = rank_score \u00d7 focus_decimal"
   },
-  "sources": [
-    {
-      "source_id": "snp-manifesto-2026",
-      "title": "SNP Manifesto 2026",
-      "url": "https://issuu.com/hinksbrandwise/docs/snp_manifesto_the_scottish_parliament_election_2"
-    }
-  ],
   "priorities": [
     {
       "priority_id": "snp-constitution",
@@ -210,9 +201,5 @@
       "rank_score": 0.1,
       "priority_score": 0.007
     }
-  ],
-  "notes": [
-    "Manifesto link currently points to the published Issuu document provided by the user.",
-    "If the SNP publishes a direct PDF link later, the manifesto URL can be swapped without changing the rest of the site data."
   ]
 }

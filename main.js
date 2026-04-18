@@ -53,7 +53,7 @@ const INLINE_DATA = {
     { analysis_source: "manifesto", party: { party_name: "Scottish Labour", party_website: "https://scottishlabour.org.uk/", party_leader: "Anas Sarwar" }, manifesto: { manifesto_url: "https://scottishlabour.org.uk/wp-content/uploads/2026/04/Scottish-Labour-Manifesto-2026.pdf" }, sources: [{ source_id: "labour-manifesto", title: "Scottish Labour Manifesto 2026" }] },
     { analysis_source: "manifesto", party: { party_name: "Scottish National Party", party_website: "https://www.snp.org/", party_leader: "John Swinney" }, manifesto: { manifesto_url: "https://issuu.com/hinksbrandwise/docs/snp_manifesto_the_scottish_parliament_election_2" }, sources: [{ source_id: "snp-manifesto-2026", title: "SNP Manifesto 2026", url: "https://issuu.com/hinksbrandwise/docs/snp_manifesto_the_scottish_parliament_election_2" }] },
     { analysis_source: "manifesto", party: { party_name: "Scottish Conservatives", party_website: "https://www.scottishconservatives.com", party_leader: "Russell Findlay" }, sources: [{ source_id: "con-manifesto-2026", title: "Get Scotland Working: The Scottish Conservative and Unionist Party Manifesto 2026", url: "https://www.scottishconservatives.com/wp-content/uploads/2026/04/Web-SCUP-Manifesto-2026.pdf" }] },
-    { analysis_source: "website_structured", party: { party_name: "Scottish Liberal Democrats", party_website: "https://www.scotlibdems.org.uk", party_leader: "Alex Cole-Hamilton" }, sources: [{ source_id: "ld-site", title: "Scottish Liberal Democrats", url: "https://www.scotlibdems.org.uk" }] },
+    { analysis_source: "manifesto", party: { party_name: "Scottish Liberal Democrats", party_website: "https://www.scotlibdems.org.uk/", party_leader: "Alex Cole-Hamilton" }, manifesto: { manifesto_url: "https://www.scotlibdems.org.uk/fileadmin/groups/511/Documents/1210292388738801922agdfhfuhfhskk/Change_with_fairness_at_its_heart.pdf" }, sources: [{ source_id: "ld-manifesto-2026", title: "Change with Fairness at its Heart: Manifesto 2026", url: "https://www.scotlibdems.org.uk/fileadmin/groups/511/Documents/1210292388738801922agdfhfuhfhskk/Change_with_fairness_at_its_heart.pdf" }] },
     { analysis_source: "manifesto", party: { party_name: "Reform UK Scotland", party_website: "https://reformuk.scot/", party_leader: "Malcolm Offord" }, sources: [{ source_id: "reform-manifesto", title: "Reform UK Scotland Manifesto", url: "https://reformuk.scot/wp-content/uploads/2026/04/Reform-UK-Scotland-Manifesto-2026.pdf" }] },
     { analysis_source: "manifesto", party: { party_name: "Scottish Greens", party_website: "https://greens.scot/", party_leader: "Gillian Mackay and Ross Greer" }, manifesto: { manifesto_url: "https://greens.scot/sites/default/files/public/Scottish%20Greens%20Manifesto.pdf" }, sources: [{ source_id: "greens-manifesto-2026", title: "Scottish Greens Manifesto 2026", url: "https://greens.scot/sites/default/files/public/Scottish%20Greens%20Manifesto.pdf" }] }
   ]
@@ -90,7 +90,7 @@ function logo(partyId, sm = false) {
 
 function convertPartyFile(raw, config) {
   const isManifesto = raw.analysis_source === "manifesto";
-  const manifestoUrl = raw.sources?.[0]?.url || raw.manifesto?.manifesto_url || "";
+  const manifestoUrl = raw.manifesto?.manifesto_url || raw.sources?.[0]?.url || "";
   return {
     id: config.id,
     short: config.short,

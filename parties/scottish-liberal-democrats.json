@@ -1,19 +1,375 @@
 {
-  "schema_version": "1.0",
-  "analysis_id": "ld-scotland-2026-v1",
-  "analysis_source": "website_structured",
-  "confidence_level": "medium_high",
+  "schema_version": "1.1",
+  "analysis_id": "scottish-lib-dems-2026-manifesto-v1",
+  "analysis_source": "manifesto",
+  "created_at": "2026-04-18",
+  "confidence_level": "high",
   "party": {
     "party_name": "Scottish Liberal Democrats",
-    "party_website": "https://www.scotlibdems.org.uk",
+    "party_short_name": "Lib Dems",
+    "party_website": "https://www.scotlibdems.org.uk/",
     "party_leader": "Alex Cole-Hamilton"
+  },
+  "manifesto": {
+    "title": "Change with Fairness at its Heart: Manifesto 2026",
+    "election": "2026 Scottish Parliament election",
+    "manifesto_url": "https://www.scotlibdems.org.uk/fileadmin/groups/511/Documents/1210292388738801922agdfhfuhfhskk/Change_with_fairness_at_its_heart.pdf",
+    "document_type": "pdf",
+    "published": true,
+    "status": "published_and_analysed"
+  },
+  "analysis_method": {
+    "priority_extraction_method": "Manifesto sections identified from the official 2026 manifesto landing page, linked PDF and chapter list.",
+    "weighting_method": "Weight-unit scoring based on chapter prominence and early manifesto issue emphasis.",
+    "ranking_method": "Rank combines front-of-manifesto issue prominence and the presence of dedicated manifesto chapters.",
+    "position_handling": "Directions are inferred from section framing on the official manifesto page and linked PDF.",
+    "scoring_formula": "priority_score = rank_score × focus_decimal; rank_score = (11 - rank) / 10"
   },
   "sources": [
     {
-      "source_id": "ld-site",
-      "title": "Scottish Liberal Democrats",
-      "url": "https://www.scotlibdems.org.uk"
+      "source_id": "manifesto-pdf",
+      "url": "https://www.scotlibdems.org.uk/fileadmin/groups/511/Documents/1210292388738801922agdfhfuhfhskk/Change_with_fairness_at_its_heart.pdf",
+      "description": "Official manifesto PDF"
+    },
+    {
+      "source_id": "manifesto-page",
+      "url": "https://www.scotlibdems.org.uk/2026-manifesto",
+      "description": "Official manifesto page with chapter structure and issue summaries"
+    },
+    {
+      "source_id": "intro-cost",
+      "description": "Helping you with the cost of living"
+    },
+    {
+      "source_id": "intro-health",
+      "description": "Delivering first-rate health care"
+    },
+    {
+      "source_id": "intro-transport",
+      "description": "Getting Scotland moving again"
+    },
+    {
+      "source_id": "intro-education",
+      "description": "Getting Scottish education back to its best"
+    },
+    {
+      "source_id": "economy",
+      "description": "The Economy"
+    },
+    {
+      "source_id": "business",
+      "description": "Business and Jobs"
+    },
+    {
+      "source_id": "health",
+      "description": "Health"
+    },
+    {
+      "source_id": "care",
+      "description": "Care"
+    },
+    {
+      "source_id": "education",
+      "description": "Education"
+    },
+    {
+      "source_id": "families",
+      "description": "Families, Children and Young People"
+    },
+    {
+      "source_id": "housing",
+      "description": "Housing"
+    },
+    {
+      "source_id": "communities",
+      "description": "Communities and Local Government"
+    },
+    {
+      "source_id": "transport",
+      "description": "Transport"
+    },
+    {
+      "source_id": "climate-energy",
+      "description": "Climate Change and Energy"
+    },
+    {
+      "source_id": "environment",
+      "description": "Natural Environment"
+    },
+    {
+      "source_id": "farming-food",
+      "description": "Farming and Food"
+    },
+    {
+      "source_id": "rights",
+      "description": "Rights and Equalities"
+    },
+    {
+      "source_id": "political-reform",
+      "description": "Political Reform"
     }
   ],
-  "priorities": []
+  "priorities": [
+    {
+      "priority_id": "libdems-2026-cost",
+      "priority_name": "Cost of Living",
+      "standard_category": "Cost of Living",
+      "position": "Helping you with the cost of living",
+      "rank": 1,
+      "weight_units": 12,
+      "source_ids": [
+        "manifesto-page",
+        "intro-cost"
+      ],
+      "direction": "support",
+      "summary": "Front-of-manifesto issue emphasis and one of the clearest headline campaign themes.",
+      "focus_percentage": 10.3,
+      "focus_decimal": 0.103,
+      "rank_score": 1.0,
+      "priority_score": 0.103
+    },
+    {
+      "priority_id": "libdems-2026-health",
+      "priority_name": "Health",
+      "standard_category": "Health",
+      "position": "Delivering first-rate health care",
+      "rank": 2,
+      "weight_units": 12,
+      "source_ids": [
+        "manifesto-page",
+        "intro-health",
+        "health"
+      ],
+      "direction": "support",
+      "summary": "A dominant manifesto theme with both headline framing and a dedicated health chapter.",
+      "focus_percentage": 10.3,
+      "focus_decimal": 0.103,
+      "rank_score": 0.9,
+      "priority_score": 0.093
+    },
+    {
+      "priority_id": "libdems-2026-transport",
+      "priority_name": "Transport",
+      "standard_category": "Transport",
+      "position": "Getting Scotland moving again",
+      "rank": 3,
+      "weight_units": 11,
+      "source_ids": [
+        "manifesto-page",
+        "intro-transport",
+        "transport"
+      ],
+      "direction": "support",
+      "summary": "Strongly emphasized early in the manifesto and reinforced by a dedicated transport chapter.",
+      "focus_percentage": 9.5,
+      "focus_decimal": 0.095,
+      "rank_score": 0.8,
+      "priority_score": 0.076
+    },
+    {
+      "priority_id": "libdems-2026-education",
+      "priority_name": "Education",
+      "standard_category": "Education",
+      "position": "Getting Scottish education back to its best",
+      "rank": 4,
+      "weight_units": 10,
+      "source_ids": [
+        "manifesto-page",
+        "intro-education",
+        "education"
+      ],
+      "direction": "support",
+      "summary": "Prominent opening issue plus a full education section.",
+      "focus_percentage": 8.6,
+      "focus_decimal": 0.086,
+      "rank_score": 0.7,
+      "priority_score": 0.06
+    },
+    {
+      "priority_id": "libdems-2026-economy",
+      "priority_name": "Tax / Growth / Business",
+      "standard_category": "Tax / Growth",
+      "position": "The Economy and Business and Jobs",
+      "rank": 5,
+      "weight_units": 10,
+      "source_ids": [
+        "manifesto-page",
+        "economy",
+        "business"
+      ],
+      "direction": "support",
+      "summary": "Economy and business are separated into two dedicated chapters, giving them substantial overall weight.",
+      "focus_percentage": 8.6,
+      "focus_decimal": 0.086,
+      "rank_score": 0.6,
+      "priority_score": 0.052
+    },
+    {
+      "priority_id": "libdems-2026-care",
+      "priority_name": "Care",
+      "standard_category": "Health",
+      "position": "Everyone deserves high-quality care when they need it",
+      "rank": 6,
+      "weight_units": 8,
+      "source_ids": [
+        "manifesto-page",
+        "care"
+      ],
+      "direction": "support",
+      "summary": "Dedicated care chapter centered on dignity, independence and support at home.",
+      "focus_percentage": 6.9,
+      "focus_decimal": 0.069,
+      "rank_score": 0.5,
+      "priority_score": 0.035
+    },
+    {
+      "priority_id": "libdems-2026-families",
+      "priority_name": "Families / Childcare",
+      "standard_category": "Families",
+      "position": "Families, Children and Young People",
+      "rank": 7,
+      "weight_units": 8,
+      "source_ids": [
+        "manifesto-page",
+        "families"
+      ],
+      "direction": "support",
+      "summary": "A dedicated chapter focusing on support for children, young people and families.",
+      "focus_percentage": 6.9,
+      "focus_decimal": 0.069,
+      "rank_score": 0.4,
+      "priority_score": 0.028
+    },
+    {
+      "priority_id": "libdems-2026-housing",
+      "priority_name": "Housing",
+      "standard_category": "Housing",
+      "position": "A warm, safe, affordable place to live",
+      "rank": 8,
+      "weight_units": 8,
+      "source_ids": [
+        "manifesto-page",
+        "housing"
+      ],
+      "direction": "support",
+      "summary": "Housing has its own chapter focused on affordability and security.",
+      "focus_percentage": 6.9,
+      "focus_decimal": 0.069,
+      "rank_score": 0.3,
+      "priority_score": 0.021
+    },
+    {
+      "priority_id": "libdems-2026-local",
+      "priority_name": "Local Government / Communities",
+      "standard_category": "Local Government",
+      "position": "Communities and Local Government",
+      "rank": 9,
+      "weight_units": 7,
+      "source_ids": [
+        "manifesto-page",
+        "communities"
+      ],
+      "direction": "support",
+      "summary": "Emphasis on decisions being taken closer to people and stronger local communities.",
+      "focus_percentage": 6.0,
+      "focus_decimal": 0.06,
+      "rank_score": 0.2,
+      "priority_score": 0.012
+    },
+    {
+      "priority_id": "libdems-2026-energy",
+      "priority_name": "Energy / Climate",
+      "standard_category": "Energy",
+      "position": "Climate Change and Energy",
+      "rank": 10,
+      "weight_units": 7,
+      "source_ids": [
+        "manifesto-page",
+        "climate-energy"
+      ],
+      "direction": "support",
+      "summary": "Dedicated chapter linking climate policy to cheaper, cleaner domestic energy.",
+      "focus_percentage": 6.0,
+      "focus_decimal": 0.06,
+      "rank_score": 0.1,
+      "priority_score": 0.006
+    },
+    {
+      "priority_id": "libdems-2026-environment",
+      "priority_name": "Natural Environment",
+      "standard_category": "Environment",
+      "position": "Protecting our precious natural environment",
+      "rank": 11,
+      "weight_units": 6,
+      "source_ids": [
+        "manifesto-page",
+        "environment"
+      ],
+      "direction": "support",
+      "summary": "Separate environmental chapter focused on green spaces, rivers and ecosystems.",
+      "focus_percentage": 5.2,
+      "focus_decimal": 0.052,
+      "rank_score": 0.0,
+      "priority_score": 0.0
+    },
+    {
+      "priority_id": "libdems-2026-farming",
+      "priority_name": "Farming and Food",
+      "standard_category": "Rural",
+      "position": "Farming and Food",
+      "rank": 12,
+      "weight_units": 6,
+      "source_ids": [
+        "manifesto-page",
+        "farming-food"
+      ],
+      "direction": "support",
+      "summary": "Dedicated chapter on producers, food affordability and rural interests.",
+      "focus_percentage": 5.2,
+      "focus_decimal": 0.052,
+      "rank_score": -0.1,
+      "priority_score": -0.005
+    },
+    {
+      "priority_id": "libdems-2026-rights",
+      "priority_name": "Rights and Equalities",
+      "standard_category": "Rights / Equalities",
+      "position": "A free society where every person's rights and liberties are protected",
+      "rank": 13,
+      "weight_units": 6,
+      "source_ids": [
+        "manifesto-page",
+        "rights"
+      ],
+      "direction": "support",
+      "summary": "Dedicated rights and equalities chapter.",
+      "focus_percentage": 5.2,
+      "focus_decimal": 0.052,
+      "rank_score": -0.2,
+      "priority_score": -0.01
+    },
+    {
+      "priority_id": "libdems-2026-political-reform",
+      "priority_name": "Political Reform",
+      "standard_category": "Political Reform",
+      "position": "Transfer power back to the people",
+      "rank": 14,
+      "weight_units": 5,
+      "source_ids": [
+        "manifesto-page",
+        "political-reform"
+      ],
+      "direction": "support",
+      "summary": "A distinct chapter on constitutional and institutional reform.",
+      "focus_percentage": 4.3,
+      "focus_decimal": 0.043,
+      "rank_score": -0.3,
+      "priority_score": -0.013
+    }
+  ],
+  "notes": [
+    "This JSON is based on the official manifesto webpage and linked PDF structure.",
+    "Weights use a structured prominence model, not exact word counts.",
+    "The file is suitable as a manifesto-led input for the matcher and can be refined later with full-text counting from the PDF."
+  ]
 }
